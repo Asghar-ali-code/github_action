@@ -24,7 +24,7 @@ jobs:
           echo "${{ secrets.KEYSTORE }}" | base64 -d > keyStore.jks
       - name: Debug Environment Variables
         run: |
-          echo "SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}"
+          echo "KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}"
       - name: Grant execute permissions to gradlew
         run: |
           chmod +x ./gradlew
