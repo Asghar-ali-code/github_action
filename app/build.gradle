@@ -8,6 +8,9 @@ android {
     compileSdk 34
 
         signingConfigs {
+            doLast {
+                println "SIGNING_KEY_PASSWORD: " + System.getenv("SIGNING_KEY_PASSWORD")
+            }
             release {
                 storeFile file("../keyStore.jks")
                 storePassword System.getenv("SIGNING_KEY_PASSWORD")

@@ -22,7 +22,9 @@ jobs:
       - name: Decode Base64 Keystore
         run: |
           echo "${{ secrets.KEYSTORE }}" | base64 -d > keyStore.jks
-
+      - name: Debug Environment Variables
+        run: |
+          echo "SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}"
       - name: Grant execute permissions to gradlew
         run: |
           chmod +x ./gradlew
