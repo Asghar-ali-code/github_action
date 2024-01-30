@@ -24,7 +24,7 @@ jobs:
           echo "${{ secrets.KEYSTORE }}" | base64 -d > keyStore.jks
       - name: Debug Environment Variables
         run: |
-          echo "SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}"
+          echo "SIGNING_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}"
       - name: Grant execute permissions to gradlew
         run: |
           chmod +x ./gradlew
@@ -37,8 +37,8 @@ jobs:
         run: |
           jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
             -keyStore keyStore.jks \
-            -storepass ${{ secrets.SIGNING_KEY_PASSWORD}} \
-            -keypass ${{ secrets.SIGNING_KEY_PASSWORD }} \
+            -storepass ${{ secrets.KEY_PASSWORD}} \
+            -keypass ${{ secrets.KEY_PASSWORD }} \
             app/build/outputs/apk/release/app-release-unsigned.apk \
             ${{ secrets.SIGNING_KEY_ALIAS }}
 
