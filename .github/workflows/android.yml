@@ -24,7 +24,13 @@ jobs:
           echo "${{ secrets.KEYSTORE }}" | base64 -d > keyStore.jks
       - name: Debug Environment Variables
         run: |
-          echo "KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}"
+          if [ -z "${{ secrets.KEY_PASSWORD }}" ]; then
+            echo "KEY_PASSWORD is null. Setting default value..."
+            export KEY_PASSWORD="password"  # Change this to your desired default password
+          else
+            export KEY_PASSWORD="${{ secrets.KEY_PASSWORD }}"
+          fi
+          echo "KEY_PASSWORD: $KEY_PASSWORD"
       - name: Grant execute permissions to gradlew
         run: |
           chmod +x ./gradlew
