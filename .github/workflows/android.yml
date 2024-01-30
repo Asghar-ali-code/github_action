@@ -21,7 +21,7 @@ jobs:
 
       - name: Decode Base64 Keystore
         run: |
-          echo "${{ secrets.BASE64_ENCODED_KEYSTORE }}" | base64 -d > keystore.jks
+          echo "${{ secrets.BASE64_ENCODED_KEYSTORE }}" | base64 -d > keyStore.jks
 
       - name: Grant execute permissions to gradlew
         run: |
@@ -34,7 +34,7 @@ jobs:
       - name: Sign APK
         run: |
           jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 \
-            -keystore keystore.jks \
+            -keyStore keyStore.jks \
             -storepass ${{ secrets.SIGNING_KEY_PASSWORD }} \
             -keypass ${{ secrets.SIGNING_KEY_PASSWORD }} \
             app/build/outputs/apk/release/app-release-unsigned.apk \
