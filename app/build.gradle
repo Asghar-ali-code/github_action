@@ -6,21 +6,14 @@ plugins {
 android {
     namespace 'com.example.testaction'
     compileSdk 34
-    signingConfigs {
-        release {
-            def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keyStore/"
-            def allFilesFromDir = new File(tmpFilePath).listFiles()
 
-            if (allFilesFromDir != null) {
-                def keystoreFile = allFilesFromDir.first()
-                keystoreFile.renameTo("../keyStore.jks")
+        signingConfigs {
+            release {
+                storeFile file("keyStore.jks")
+                storePassword System.getenv("SIGNING_KEY_PASSWORD")
+                keyPassword System.getenv("SIGNING_KEY_PASSWORD")
+                keyAlias System.getenv("SIGNING_KEY_ALIAS")
             }
-
-            storeFile = file("../keyStore.jks")
-            storePassword System.getenv("SIGNING_KEY_PASSWORD")
-            keyAlias System.getenv("KEYSTORE_ALIAS")
-            keyPassword System.getenv("SIGNING_KEY_PASSWORD")
-        }
     }
 
     defaultConfig {
