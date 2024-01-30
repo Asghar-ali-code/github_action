@@ -17,9 +17,9 @@ android {
             }
 
             storeFile = file("../keyStore.jks")
-            storePassword System.getenv("password")
-            keyAlias System.getenv("key0")
-            keyPassword System.getenv("password")
+            storePassword System.getenv("SIGNING_KEY_PASSWORD")
+            keyAlias System.getenv("KEYSTORE_ALIAS")
+            keyPassword System.getenv("SIGNING_KEY_PASSWORD")
         }
     }
 
